@@ -13,6 +13,8 @@ namespace SpaceShooter
 
         Stage stage_one;
 
+        Matrix transform_matrix;
+
         public SpaceShooter()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -74,8 +76,9 @@ namespace SpaceShooter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap);
-            spriteBatch.Draw(stage_one.stage_background, new Vector2(0, 0), Color.White);
+            transform_matrix = Matrix.CreateTranslation(new Vector3(100, -100,0));
+            spriteBatch.Begin(samplerState: SamplerState.LinearWrap, transformMatrix: transform_matrix);
+            spriteBatch.Draw(texture: stage_one.stage_background, position: new Vector2(0, 0), color: Color.Red, sourceRectangle: new Rectangle(0, 0, stage_one.stage_background.Width * 4, stage_one.stage_background.Height * 4));
             spriteBatch.End();
             base.Draw(gameTime);
         }
